@@ -4,12 +4,13 @@ let gCtx
 function onInit() {
   gElCanvas = document.querySelector("canvas")
   gCtx = gElCanvas.getContext("2d")
+  gElCanvas.addEventListener("click", onCanvasClick)
   renderMeme()
   renderGallery()
 }
 
 function renderMeme() {
-  const elMeme = new Image()
+  const elMeme = new Image() 
   elMeme.src = `img/${getMeme().selectedImgId}.jpg`
   elMeme.onload = () => {
     gElCanvas.height =
@@ -17,86 +18,69 @@ function renderMeme() {
     gCtx.drawImage(elMeme, 0, 0, gElCanvas.width, gElCanvas.height)
 
     getMeme().lines.forEach((line, idx) => {
-      let vertPos // vertical position
 
+      let vertPos 
       if (line.Pos === "") {
-        vertPos = gElCanvas.height / 2 // all the new lines will be placed at the center
+        vertPos = gElCanvas.height / 2 // center for new lines
+      } else if (idx === 0) {
+        vertPos = 50 // top for the first line
       } else {
-        vertPos = idx === 0 ? 50 : gElCanvas.height - 40 // if the index is 0 top line is 50 else......
+        vertPos = gElCanvas.height - 40 // bottom  for the second line
       }
 
-      // Measure the text width and height
-      gCtx.font = `${line.Size}px Impact`
-      const textWidth = gCtx.measureText(line.txt).width
-      const textHeight = line.Size
+      createSentence(line, vertPos)
 
-      if (idx === getMeme().selectedLineIdx) {
-        // highlight the selected line
-        gCtx.strokeStyle = "red"
-        gCtx.lineWidth = 2
-        gCtx.strokeRect(
-          // method of the Canvas 2D draws a rectangle that is stroked (outlined)
-          gElCanvas.width / 2 - textWidth / 2 - 10, //x
-          vertPos - textHeight, // y
-          textWidth + 20, // width
-          textHeight + 10 // height
-        )
-      }
-
-      gCtx.fillStyle = line.Color // draw the text itself
-      gCtx.textAlign = "center"
-      gCtx.fillText(line.txt, gElCanvas.width / 2, vertPos)
     })
   }
 }
 
-function createSentence(position, vertPos) {
-  const line = getMeme().lines.find((line) => line.Pos === position)
-  if (line) {
-    //if the line really exists
-    gCtx.fillStyle = line.Color
-    gCtx.font = `${line.Size}px Impact`
-    gCtx.textAlign = "center"
-    gCtx.fillText(line.txt, gElCanvas.width / 2, vertPos)
+function onCanvasClick(event) { // finding if the click that was registered is in the area of the text
+  const x = event.offsetX
+  const y = event.offsetY
+
+  const clickedLine = getMeme().lines.find((line) => {
+    return (
+      x >= line.x &&
+      x <= line.x + line.width &&
+      y >= line.y &&
+      y <= line.y + line.height
+    )
+  })
+
+  if (clickedLine) { // if clicked really exists 
+    const lineIndex = getMeme().lines.indexOf(clickedLine)
+    getMeme().selectedLineIdx = lineIndex
+    renderMeme()
   }
 }
 
-function onSetLineText(Pos) {
-  const inputName = Pos === "top" ? "topLine" : "bottomLine" // if the postion is top change the top text, else change the bottom text
-  const txt = document.querySelector(`[name=${inputName}]`).value
-  const line = getMeme().lines.find((line) => line.Pos === Pos)
-  if (line) {
-    line.txt = txt
-  }
+function onSetLineText(Pos) {   // put text based on its position
+  setLineText(Pos)
   renderMeme()
 }
 
-// Change text color
-function onFillStyle() {
-  const fillColor = document.querySelector("[name=fill-color]").value
-  getMeme().lines[getMeme().selectedLineIdx].Color = fillColor
+function onFillStyle() {  // change color
+  fillStyle()
   renderMeme()
 }
 
-function onFontUp() {
-  const selectedLine = getMeme().lines[getMeme().selectedLineIdx]
-  selectedLine.Size += 5
+function onFontUp() { // font increase
+  fontUp()
   renderMeme()
 }
 
-function onFontDown() {
-  const selectedLine = getMeme().lines[getMeme().selectedLineIdx]
-  selectedLine.Size -= 5
+function onFontDown() { // font decrease
+  fontDown()
   renderMeme()
 }
 
-function onDownload() {
+function onDownload() { // download MEME
   const dataURL = gElCanvas.toDataURL("image/png")
   const link = document.querySelector(".download-link")
   link.href = dataURL
 }
 
-function onAddLine() {
+function onAddLine() { // add new line to the MEME
   getMeme().lines.push({
     txt: "Insert your text here",
     Size: 30,
@@ -106,7 +90,7 @@ function onAddLine() {
   renderMeme()
 }
 
-function onSwitchLine() {
+function onSwitchLine() { // switch between lines
   getMeme().selectedLineIdx++
   if (getMeme().selectedLineIdx >= getMeme().lines.length) {
     getMeme().selectedLineIdx = 0

@@ -15,14 +15,31 @@
 
       <section class="editor">
         <canvas width="500" height="500"> </canvas>
+
         <input
           type="text"
-          name="TopLine"
+          name="topLine"
           placeholder="Enter The Top Line Here"
           required
-          oninput="setLineText()"
+          oninput="onSetLineText('top')"
         />
-        <button></button>
+
+        <input
+          type="text"
+          name="bottomLine"
+          placeholder="Enter The Bottom Line Here"
+          required
+          oninput="onSetLineText('bottom')"
+        />
+
+        <input type="color" name="fill-color" oninput="onFillStyle()" />
+
+        <button onclick="onFontUp()">A+</button>
+        <button onclick="onFontDown()">A-</button>
+
+        <a class="download-link" href="" download="meme.png">
+          <button onclick="onDownload()">Download MEME</button>
+        </a>
       </section>
     </main>
     <footer>

@@ -3,13 +3,10 @@ let gCtx
 
 function onInit() {
   gElCanvas = document.querySelector("canvas")
-  console.log(gElCanvas)
   gCtx = gElCanvas.getContext("2d")
   renderMeme()
   renderGallery()
 }
-
-
 
 function renderMeme() {
   const elMeme = new Image()
@@ -18,20 +15,49 @@ function renderMeme() {
     gElCanvas.height =
       (elMeme.naturalHeight / elMeme.naturalWidth) * gElCanvas.width
     gCtx.drawImage(elMeme, 0, 0, gElCanvas.width, gElCanvas.height)
-    createSentence(20, 30, gElCanvas.width - 20, 30)
+
+    createSentence("top", 50)
+    createSentence("bottom", gElCanvas.height - 40)
   }
 }
 
-
-
-function setLineText(){
-    const selectedLine = gMeme.lines[gMeme.selectedLineIdx]
-    const txt = document.querySelector('[name=TopLine]').value
-    selectedLine.txt = txt
-    renderMeme()
+function createSentence(position, vertPos) {
+  const line = getMeme().lines.find((line) => line.Pos === position)
+  if (line) {
+    gCtx.fillStyle = line.Color
+    gCtx.font = `${line.Size}px Impact`
+    gCtx.textAlign = "center"
+    gCtx.fillText(line.txt, gElCanvas.width / 2, vertPos)
+  }
 }
 
-function getMeme() {
-    return gMeme
+function onSetLineText(Pos) {
+  const inputName = Pos === "top" ? "topLine" : "bottomLine"
+  const txt = document.querySelector(`[name=${inputName}]`).value
+  const line = getMeme().lines.find((line) => line.Pos === Pos)
+  if (line) {
+    line.txt = txt
+  }
+  renderMeme()
 }
 
+// Change text color
+function onFillStyle() {
+  const fillColor = document.querySelector("[name=fill-color]").value
+  getMeme().lines.forEach((line) => (line.Color = fillColor))
+}
+
+function onFontUp() {
+  getMeme().lines.forEach((line) => (line.Size += 5))
+  renderMeme()
+}
+
+function onFontDown() {
+  getMeme().lines.forEach((line) => (line.Size -= 5)) 
+  renderMeme()
+}
+function onDownload() {
+  const dataURL = gElCanvas.toDataURL("image/png")
+  const link = document.querySelector(".download-link")
+  link.href = dataURL
+}

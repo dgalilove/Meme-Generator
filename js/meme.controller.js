@@ -6,6 +6,7 @@ function onInit() {
   console.log(gElCanvas)
   gCtx = gElCanvas.getContext("2d")
   renderMeme()
+  renderGallery()
 }
 
 
@@ -21,7 +22,9 @@ function renderMeme() {
   }
 }
 
-function onChangeText(){
+
+
+function setLineText(){
     const selectedLine = gMeme.lines[gMeme.selectedLineIdx]
     const txt = document.querySelector('[name=TopLine]').value
     selectedLine.txt = txt

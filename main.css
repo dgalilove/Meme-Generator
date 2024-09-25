@@ -1,3 +1,17 @@
+
+
+
+
+
 canvas{
     border: 1px black solid;
+}
+.gallery{
+    background-color: yellow;
+}
+.editor{
+        background-color: aqua;
+}
+.meme{
+    width: 100px;
 }

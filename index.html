@@ -1,42 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meme Generator</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
-     <section class="gallery"></section>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body onload="onInit()">
+    <section class="gallery"></section>
 
+    <section class="editor">
+      <canvas width="500" height="500"> </canvas>
+      <input
+        type="text"
+        name="TopLine"
+        placeholder="Enter The Top Line Here"
+        required
+        oninput="onChangeText()"
+      />
+    </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
-    <section class="editor"></section>
-
-
-
-
-
-
-
-
-
-
-
-
- <script src="js/main.js "></script>   
-</body>
+    <script src="js/meme.service.js"></script>
+    <script src="js/meme.controller.js"></script>
+  </body>
 </html>

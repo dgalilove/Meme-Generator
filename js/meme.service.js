@@ -36,8 +36,3 @@ function setImg(elImg){
   const id = parseInt(elImg.id.substring(3)) // removes the 'img' and gets the id as a number 
   gMeme.selectedImgId = id
 }
-function onImgSelect() {
-  const selectedImg = gImgs.find(img => img.id === gMeme.selectedImgId)
-  document.querySelector('#meme-img').src = selectedImg.url
-}
-var x = 8

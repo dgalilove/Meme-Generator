@@ -40,3 +40,4 @@ function onImgSelect() {
   const selectedImg = gImgs.find(img => img.id === gMeme.selectedImgId)
   document.querySelector('#meme-img').src = selectedImg.url
 }
+var x = 8

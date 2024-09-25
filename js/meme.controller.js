@@ -34,5 +34,5 @@ function setLineText(){
 function getMeme() {
     return gMeme
 }
-
+var x = 8
 

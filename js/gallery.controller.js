@@ -17,4 +17,15 @@ function renderGallery() {
 function onImgSelect(elImg) {
   setImg(elImg)
   renderMeme()
+
+  const elGallery = document.querySelector(".gallery")
+  const elSearch = document.querySelector(".search")
+  const elBio = document.querySelector(".bio")
+  elGallery.style.display = "none"
+  elSearch.style.display = "none"
+  elBio.style.display = "none"
+
+  
+  const elEditor = document.querySelector(".editor")
+  elEditor.style.display = "block"
 }

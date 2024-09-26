@@ -1,0 +1,27 @@
+main {
+  background-color: rgba(36, 34, 34, 0.815);
+  padding: 20px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  padding: 20px;
+}
+.meme {
+  width: 350px;
+  border: none;
+  border-radius: 5px;
+}
+
+canvas {
+  border: 1px solid black;
+  width: 100%;
+  max-height: 100%;
+}
+
+.editor {
+  display: none;
+}

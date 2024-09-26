@@ -1,0 +1,19 @@
+.search {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  background-color: white; 
+  margin-left: 80px;
+}
+
+.search input[type="search"] {
+  width: 200px;
+  height: 45px;
+  padding: 10px 15px;
+  font-size: 1.1em;
+  border: 2px solid blueviolet;
+}
+
+.search input[type="search"]:focus {
+  border-color: darkviolet;
+}

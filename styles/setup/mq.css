@@ -1,0 +1,17 @@
+@media (max-width: 945px) {
+    header {
+      height: auto; /* Adjust to a more reasonable height */
+      padding: 20px; /* Add padding to make it look more spacious */
+    }
+    
+    .logo {
+      font-size: 2em; /* Adjust font size for smaller screens */
+    }
+    .gallery{
+
+        gap :10px;
+    }
+    .meme{
+        width: 400px;
+    }
+}

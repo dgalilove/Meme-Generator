@@ -5,15 +5,16 @@ main {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
-  justify-items: center;
-  padding: 20px;
+  padding: 20px 50px;
+  background-color: rgba(36, 34, 34, 0.815);
 }
+
 .meme {
-  width: 350px;
+  width: 100%;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 canvas {

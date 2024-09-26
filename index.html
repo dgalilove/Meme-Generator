@@ -1,92 +1,92 @@
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Meme Generator</title>
-      <link rel="stylesheet" href="styles/styles.css">
-      <script
-        src="https://kit.fontawesome.com/2a636867a9.js"
-        crossorigin="anonymous"
-      ></script>
-    </head>
-    <body onload="onInit()">
-      <header>
-        <p class="logo">memegen</p>
-        <nav class="main-nav">
-          <ul>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">About</a></li>
-          </ul>
-        </nav>
-      </header>
-      <section class="search">
-        <input type="search" name="search" id="search" placeholder="Search memes..." />
-      </section>
-      
-      <main>
-        <section class="gallery"></section>
-
-        <section class="editor">
-          <canvas width="500" height="500"> </canvas>
-
-          <input
-            type="text"
-            name="topLine"
-            placeholder="Enter The Top Line Here"
-            required
-            oninput="onSetLineText('top')"
-          />
-
-          <input
-            type="text"
-            name="bottomLine"
-            placeholder="Enter The Bottom Line Here"
-            required
-            oninput="onSetLineText('bottom')"
-          />
-          <button onclick="onSwitchLine()">Switch Lines</button>
-          <button onclick="onAddLine()">Add Line</button>
-          <input type="color" name="fill-color" oninput="onFillStyle()" />
-
-          <button onclick="onFontUp()">A+</button>
-          <button onclick="onFontDown()">A-</button>
-
-          <a class="download-link" href="" download="meme.png">
-            <button onclick="onDownload()">Download MEME</button>
-          </a>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Meme Generator</title>
+        <link rel="stylesheet" href="styles/styles.css">
+        <script
+          src="https://kit.fontawesome.com/2a636867a9.js"
+          crossorigin="anonymous"
+        ></script>
+      </head>
+      <body onload="onInit()">
+        <header>
+          <p class="logo">memegen</p>
+          <nav class="main-nav">
+            <ul>
+              <li><a href="#">Gallery</a></li>
+              <li><a href="#">About</a></li>
+            </ul>
+          </nav>
+        </header>
+        <section class="search">
+          <input type="search" name="search" id="search" placeholder="Enter search keyword..." />
         </section>
-      </main>
-      <section class="bio">
-        <img src="img/dg.jpg" alt="" />
-        <div class="bio-info">
-          <h2>Daniel Galilove</h2>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut, nesciunt
-            quaerat. Soluta assumenda odit rerum repellat officiis dolor corporis,
-            ea laborum molestias delectus odio velit quos neque facilis
-            praesentium voluptas!
-          </p>
-          <ul>
-            <li>
-              <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa-brands fa-github"></i></a>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <footer>
-        <p>memegen</p>
-        <small>copyright daniel galilove</small>
-      </footer>
+        
+        <main>
+          <section class="gallery"></section>
 
-      <script src="js/meme.service.js"></script>
-      <script src="js/gallery.controller.js"></script>
-      <script src="js/meme.controller.js"></script>
-    </body>
-  </html>
+          <section class="editor">
+            <canvas width="500" height="500"> </canvas>
+
+            <input
+              type="text"
+              name="topLine"
+              placeholder="Enter The Top Line Here"
+              required
+              oninput="onSetLineText('top')"
+            />
+
+            <input
+              type="text"
+              name="bottomLine"
+              placeholder="Enter The Bottom Line Here"
+              required
+              oninput="onSetLineText('bottom')"
+            />
+            <button onclick="onSwitchLine()">Switch Lines</button>
+            <button onclick="onAddLine()">Add Line</button>
+            <input type="color" name="fill-color" oninput="onFillStyle()" />
+
+            <button onclick="onFontUp()">A+</button>
+            <button onclick="onFontDown()">A-</button>
+
+            <a class="download-link" href="" download="meme.png">
+              <button onclick="onDownload()">Download MEME</button>
+            </a>
+          </section>
+        </main>
+        <section class="bio">
+          <img src="img/dg.jpg" alt="" />
+          <div class="bio-info">
+            <h2>Daniel Galilove</h2>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut, nesciunt
+              quaerat. Soluta assumenda odit rerum repellat officiis dolor corporis,
+              ea laborum molestias delectus odio velit quos neque facilis
+              praesentium voluptas!
+            </p>
+            <ul>
+              <li>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <footer>
+          <p>memegen</p>
+          <small>copyright daniel galilove</small>
+        </footer>
+
+        <script src="js/meme.service.js"></script>
+        <script src="js/gallery.controller.js"></script>
+        <script src="js/meme.controller.js"></script>
+      </body>
+    </html>

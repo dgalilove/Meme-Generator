@@ -1,16 +1,15 @@
 .search {
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 20px 0;
-  background-color: white; 
-  margin-left: 80px;
+  padding: 20px;
+  background-color: white;
 }
 
 .search input[type="search"] {
-  width: 200px;
-  height: 45px;
-  padding: 10px 15px;
-  font-size: 1.1em;
+  width: 300px;
+  padding: 10px;
+  font-size: 1.2em;
   border: 2px solid blueviolet;
 }
 

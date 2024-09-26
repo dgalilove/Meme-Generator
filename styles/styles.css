@@ -1,5 +1,6 @@
 @import url(setup/vars.css);
 @import url(setup/typo.css);
+@import url(setup/mq.css);
 
 @import url(basics/base.css);
 @import url(basics/layout.css);
@@ -11,6 +12,5 @@
 @import url(components/bio.css);
 @import url(components/footer.css);
 
-@import url(setup/mq.css);
 
 

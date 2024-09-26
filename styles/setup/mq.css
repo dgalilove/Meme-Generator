@@ -1,17 +1,41 @@
-@media (max-width: 945px) {
-    header {
-      height: auto; /* Adjust to a more reasonable height */
-      padding: 20px; /* Add padding to make it look more spacious */
+@media (max-width: 768px) {
+    header .logo{
+        font-size: 3em;
+    }
+    .main-nav{
+     display: none;
+    }
+  
+    .main-nav ul li {
+      margin-left: 0;
+      margin-bottom: 10px;
+    }
+
+    body .bio {
+        display: flex; 
+        flex-direction: column; 
+        padding: 40px;
     }
     
-    .logo {
-      font-size: 2em; /* Adjust font size for smaller screens */
+    body .bio img {
+        width: 200px;
+        height: 200px;
     }
-    .gallery{
+    
+    .bio-info {
+        text-align: center; 
+    }
+    
+    body .bio .bio-info ul {
+        display: flex; 
+        justify-content: center;    
+    }
+    
 
-        gap :10px;
+    
+
+    .gallery {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      padding: 20px;
     }
-    .meme{
-        width: 400px;
-    }
-}
+  }

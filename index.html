@@ -28,33 +28,50 @@
           <section class="gallery"></section>
 
           <section class="editor">
-            <canvas width="500" height="500"> </canvas>
-
-            <input
-              type="text"
-              name="topLine"
-              placeholder="Enter The Top Line Here"
-              required
-              oninput="onSetLineText('top')"
-            />
-
-            <input
-              type="text"
-              name="bottomLine"
-              placeholder="Enter The Bottom Line Here"
-              required
-              oninput="onSetLineText('bottom')"
-            />
-            <button onclick="onSwitchLine()">Switch Lines</button>
-            <button onclick="onAddLine()">Add Line</button>
-            <input type="color" name="fill-color" oninput="onFillStyle()" />
-
-            <button onclick="onFontUp()">A+</button>
-            <button onclick="onFontDown()">A-</button>
-
-            <a class="download-link" href="" download="meme.png">
-              <button onclick="onDownload()">Download MEME</button>
-            </a>
+            <canvas width="700" height="700"> </canvas>
+            <section class="user-interface">
+              <input
+                type="text"
+                name="topLine"
+                placeholder="Enter The Top Line Here"
+                required
+                oninput="onSetLineText('top')"
+              />
+  
+              <input
+                type="text"
+                name="bottomLine"
+                placeholder="Enter The Bottom Line Here"
+                required
+                oninput="onSetLineText('bottom')"
+              />
+              <button onclick="onSwitchLine()">Switch Lines</button>
+              <button onclick="onAddLine()">Add Line</button>
+              <input type="color" name="fill-color" oninput="onFillStyle()" />
+  
+              <button onclick="onFontUp()">A+</button>
+              <button onclick="onFontDown()">A-</button>
+  
+              <a class="download-link" href="" download="meme.png">
+                <button onclick="onDownload()">Download MEME</button>
+              </a>
+              <div class="font-family-controls">
+                <select id="font-family" name="font-family" onchange="onFontStyleChange(event)">
+                  <option value="Impact">Impact</option>
+                  <option value="Arial">Arial</option>
+                  <option value="Comic Sans MS">Comic Sans MS</option>
+                  <option value="Courier New">Courier New</option>
+                  <option value="Georgia">Georgia</option>
+                  <option value="Times New Roman">Times New Roman</option>
+                  <option value="Verdana">Verdana</option>
+                </select>
+              </div>
+              <div class="text-align-controls">
+                <button onclick="onAlign('left')">Left</button>
+                <button onclick="onAlign('center')">Center</button>
+                <button onclick="onAlign('right')">Right</button>
+              </div>
+            </section>
           </section>
         </main>
         <section class="bio">

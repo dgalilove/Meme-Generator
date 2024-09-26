@@ -27,13 +27,13 @@ let gMeme = {
   lines: [
     {
       txt: "Insert your top text here",
-      Size: 30,
+      Size: 25,
       Color: "white",
       Pos: "top",
     },
     {
       txt: "Insert your bottom text here",
-      Size: 30,
+      Size: 25,
       Color: "white",
       Pos: "bottom",
     },
@@ -43,30 +43,45 @@ let gMeme = {
 let gKeywordSearchCountMap = { funny: 12, cute: 8, dogs: 15 }
 
 function createSentence(line, vertPos) {
-  gCtx.font = `${line.Size}px Impact` // font size and font style
-  const textWidth = gCtx.measureText(line.txt).width // method returns a TextMetrics object that contains information about the measured text(MDN)
+  gCtx.font = `${line.Size}px ${line.font || "Impact"}` 
+  const textWidth = gCtx.measureText(line.txt).width
   const textHeight = line.Size
 
-  line.x = gElCanvas.width / 2 - textWidth / 2 - 10 // text pos in canvas horizontally
-  line.y = vertPos - textHeight // text pos in canvas vertically
+  gCtx.textAlign = line.align || "center" 
+
+  if (line.align === "right") {
+    line.x = 95
+    console.log(gElCanvas.width) // adjust the x position to right align the text
+  } else if (line.align === "left") {
+    line.x = (gElCanvas.width /2) -10
+  } else {
+    line.x = gElCanvas.width / 2 - textWidth / 2 - 10 
+  }
+
+  line.y = vertPos - textHeight
   line.width = textWidth + 20
   line.height = textHeight + 10
 
-  gCtx.fillStyle = line.Color // Set text fill color
-  gCtx.strokeStyle = "black" // Set text stroke color (black outline)
-  gCtx.lineWidth = 2 // Set the stroke width for the text outline
-  gCtx.textAlign = "center"
+  gCtx.fillStyle = "white"
+  gCtx.strokeStyle = "black"
+  gCtx.lineWidth = 1
 
-  // Draw the text with a black outline and filled inside
   gCtx.fillText(line.txt, gElCanvas.width / 2, vertPos)
-  gCtx.strokeText(line.txt, gElCanvas.width / 2, vertPos) // Add the black outline
+  gCtx.strokeText(line.txt, gElCanvas.width / 2, vertPos)
 
-  // Highlight the selected line by drawing a rectangle around it
+  // highlight 
   if (line === getMeme().lines[getMeme().selectedLineIdx]) {
     highlightText(line)
   }
 }
 
+function highlightText(line) {
+  gCtx.strokeStyle = "lightgreen"
+  gCtx.lineWidth = 2
+  gCtx.strokeRect(line.x, line.y, line.width, line.height)
+
+  
+}
 function setImg(elImg) {
   const id = parseInt(elImg.id.substring(3)) // removes the 'img' and gets the id as a number
   gMeme.selectedImgId = id
@@ -76,18 +91,16 @@ function getMeme() {
   return gMeme
 }
 
-function highlightText(line) {
-  gCtx.strokeStyle = "black"
-  gCtx.lineWidth = 2
-  gCtx.strokeRect(line.x, line.y, line.width, line.height)
-}
-
 function setLineText(Pos) {
-  const inputName = Pos === "top" ? "topLine" : "bottomLine" // if the postion is top change the top text, else change the bottom text
-  const txt = document.querySelector(`[name=${inputName}]`).value
   const line = getMeme().lines.find((line) => line.Pos === Pos)
+  console.log("Selected Line:", line)
+
+  const input = Pos === "top" ? "topLine" : "bottomLine"
+  const txt = document.querySelector(`[name=${input}]`).value
+
   if (line) {
     line.txt = txt
+    renderMeme()
   }
 }
 
@@ -104,4 +117,13 @@ function fontUp() {
 function fontDown() {
   const selectedLine = getMeme().lines[getMeme().selectedLineIdx]
   selectedLine.Size -= 5
+}
+
+function fontStyleChange(event) {
+  const selectedLine = getMeme().lines[getMeme().selectedLineIdx]
+  selectedLine.font = event.target.value
+}
+function align(pos){
+  const selectedLine = getMeme().lines[getMeme().selectedLineIdx]
+  selectedLine.align = pos
 }

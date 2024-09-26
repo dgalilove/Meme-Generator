@@ -1,3 +1,5 @@
+"use strict"
+
 let gElCanvas
 let gCtx
 
@@ -20,12 +22,12 @@ function renderMeme() {
 
     getMeme().lines.forEach((line, idx) => {
       let vertPos
-      if (line.Pos === "") {
-        vertPos = gElCanvas.height / 2 // center for new lines
-      } else if (idx === 0) {
+      if (line.Pos === "top") {
         vertPos = 50 // top for the first line
+      } else if (line.Pos === "bottom") {
+        vertPos = gElCanvas.height - 40 // bottom for the second line
       } else {
-        vertPos = gElCanvas.height - 40 // bottom  for the second line
+        vertPos = gElCanvas.height / 2 // center for new lines
       }
 
       createSentence(line, vertPos)
@@ -34,7 +36,6 @@ function renderMeme() {
 }
 
 function onCanvasClick(event) {
-  // finding if the click that was registered is in the area of the text
   const x = event.offsetX
   const y = event.offsetY
 
@@ -48,10 +49,19 @@ function onCanvasClick(event) {
   })
 
   if (clickedLine) {
-    // if clicked really exists
     const lineIndex = getMeme().lines.indexOf(clickedLine)
     getMeme().selectedLineIdx = lineIndex
-    renderMeme()
+
+    // Update the input fields with the selected line's text
+    if (clickedLine.Pos === "top") {
+      document.querySelector(`[name=topLine]`).value = clickedLine.txt
+    } else if (clickedLine.Pos === "bottom") {
+      document.querySelector(`[name=bottomLine]`).value = clickedLine.txt
+    } else {
+      // If new line (without Pos set), add logic for other lines if needed
+    }
+
+    renderMeme() // Re-render the meme with the selected line highlighted
   }
 }
 
@@ -110,12 +120,20 @@ function onEdit(event) {
   const selectedLine = getMeme().lines[getMeme().selectedLineIdx]
 
   if (event.key === "Backspace") {
-    // if backspace delete
     selectedLine.txt = selectedLine.txt.slice(0, -1)
   } else if (event.key.length === 1) {
-    //otherwise add key
     selectedLine.txt += event.key
   }
 
+  renderMeme() // Re-render the canvas
+}
+
+function onFontStyleChange(event) {
+  fontStyleChange(event)
+  renderMeme()
+}
+
+function onAlign(pos) {
+  align(pos)
   renderMeme()
 }

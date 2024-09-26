@@ -2,7 +2,7 @@ let gElCanvas
 let gCtx
 
 function onInit() {
-  gElCanvas = document.querySelector("canvas") 
+  gElCanvas = document.querySelector("canvas")
   gCtx = gElCanvas.getContext("2d")
   gElCanvas.addEventListener("click", onCanvasClick)
   document.addEventListener("keydown", onEdit)
@@ -109,11 +109,13 @@ function onSwitchLine() {
 function onEdit(event) {
   const selectedLine = getMeme().lines[getMeme().selectedLineIdx]
 
-  if (event.key === "Backspace") { // if backspace delete
-    selectedLine.txt = selectedLine.txt.slice(0, -1) 
-  } else if (event.key.length === 1) { // otherwise add character
-    selectedLine.txt += event.key 
+  if (event.key === "Backspace") {
+    // if backspace delete
+    selectedLine.txt = selectedLine.txt.slice(0, -1)
+  } else if (event.key.length === 1) {
+    //otherwise add key
+    selectedLine.txt += event.key
   }
 
-  renderMeme() 
+  renderMeme()
 }

@@ -3,26 +3,24 @@
 let gImgs = [
   { id: 1, url: "img/1.jpg", keywords: ["explain", "president"] },
   { id: 2, url: "img/2.jpg", keywords: ["cute", "dogs"] },
-  { id: 3, url: "img/3.jpg", keywords: ["baby", "cute"]},
-  { id: 4, url: "img/4.jpg", keywords: ["cute", "cat"]},
-  { id: 5, url: "img/5.jpg", keywords: ["baby", "funny"]},
-  { id: 6, url: "img/6.jpg", keywords: ["history", "funny"]},
-  { id: 7, url: "img/7.jpg", keywords: ["baby", "eyes"]},
-  { id: 8, url: "img/8.jpg", keywords: ["willy", "funny"]},
-  { id: 9, url: "img/9.jpg", keywords: ["baby", "funny"]},
-  { id: 10, url: "img/10.jpg", keywords: ["president", "funny"]},
-  { id: 11, url: "img/11.jpg", keywords: ["kiss", "funny"]},
-  { id: 12, url: "img/12.jpg", keywords: ["point", "famous"]},
-  { id: 13, url: "img/13.jpg", keywords: ["famous", "gatsbi"]},
-  { id: 14, url: "img/14.jpg", keywords: ["matrix", "face"]},
-  { id: 15, url: "img/15.jpg", keywords: ["game of thrones", "explain"]},
-  { id: 16, url: "img/16.jpg", keywords: ["funny", "startrek"]},
-  { id: 17, url: "img/17.jpg", keywords: ["point", "president"]},
-  { id: 18, url: "img/18.jpg", keywords: [" explain", "toy"]},
-
-
-
+  { id: 3, url: "img/3.jpg", keywords: ["baby", "cute"] },
+  { id: 4, url: "img/4.jpg", keywords: ["cute", "cat"] },
+  { id: 5, url: "img/5.jpg", keywords: ["baby", "funny"] },
+  { id: 6, url: "img/6.jpg", keywords: ["history", "funny"] },
+  { id: 7, url: "img/7.jpg", keywords: ["baby", "eyes"] },
+  { id: 8, url: "img/8.jpg", keywords: ["willy", "funny"] },
+  { id: 9, url: "img/9.jpg", keywords: ["baby", "funny"] },
+  { id: 10, url: "img/10.jpg", keywords: ["president", "funny"] },
+  { id: 11, url: "img/11.jpg", keywords: ["kiss", "funny"] },
+  { id: 12, url: "img/12.jpg", keywords: ["point", "famous"] },
+  { id: 13, url: "img/13.jpg", keywords: ["famous", "gatsbi"] },
+  { id: 14, url: "img/14.jpg", keywords: ["matrix", "face"] },
+  { id: 15, url: "img/15.jpg", keywords: ["game of thrones", "explain"] },
+  { id: 16, url: "img/16.jpg", keywords: ["funny", "startrek"] },
+  { id: 17, url: "img/17.jpg", keywords: ["point", "president"] },
+  { id: 18, url: "img/18.jpg", keywords: [" pointing  ", "toy"] },
 ]
+
 let gMeme = {
   selectedImgId: 1,
   selectedLineIdx: 0,
@@ -47,17 +45,23 @@ let gKeywordSearchCountMap = { funny: 12, cute: 8, dogs: 15 }
 function createSentence(line, vertPos) {
   gCtx.font = `${line.Size}px Impact` // font size and font style
   const textWidth = gCtx.measureText(line.txt).width // method returns a TextMetrics object that contains information about the measured text(MDN)
-  const textHeight = line.Size 
+  const textHeight = line.Size
 
-  line.x = gElCanvas.width / 2 - textWidth / 2 - 10 // text pos in canvas horizontallyy
-  line.y = vertPos - textHeight //text pos in canvas verticaly
-  line.width = textWidth + 20 
+  line.x = gElCanvas.width / 2 - textWidth / 2 - 10 // text pos in canvas horizontally
+  line.y = vertPos - textHeight // text pos in canvas vertically
+  line.width = textWidth + 20
   line.height = textHeight + 10
 
-  gCtx.fillStyle = line.Color
+  gCtx.fillStyle = line.Color // Set text fill color
+  gCtx.strokeStyle = "black" // Set text stroke color (black outline)
+  gCtx.lineWidth = 2 // Set the stroke width for the text outline
   gCtx.textAlign = "center"
-  gCtx.fillText(line.txt, gElCanvas.width / 2, vertPos)
 
+  // Draw the text with a black outline and filled inside
+  gCtx.fillText(line.txt, gElCanvas.width / 2, vertPos)
+  gCtx.strokeText(line.txt, gElCanvas.width / 2, vertPos) // Add the black outline
+
+  // Highlight the selected line by drawing a rectangle around it
   if (line === getMeme().lines[getMeme().selectedLineIdx]) {
     highlightText(line)
   }
@@ -73,7 +77,7 @@ function getMeme() {
 }
 
 function highlightText(line) {
-  gCtx.strokeStyle = "white"
+  gCtx.strokeStyle = "black"
   gCtx.lineWidth = 2
   gCtx.strokeRect(line.x, line.y, line.width, line.height)
 }

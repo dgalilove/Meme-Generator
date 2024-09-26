@@ -1,0 +1,38 @@
+.bio {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 36px;
+  padding: 40px 155px;
+  background-color: white;
+}
+
+.bio img {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  justify-self: end;
+}
+
+.bio-info {
+  max-width: 530px;
+}
+
+.bio-info ul {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-top: 20px;
+  padding: 0;
+  list-style-type: none;
+}
+
+.bio-info ul li {
+  background-color: blueviolet;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.bio-info ul li a {
+  color: white;
+}

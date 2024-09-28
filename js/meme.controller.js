@@ -41,14 +41,14 @@ function onCanvasClick(event) {
     let xStart, xEnd
 
     if (line.align === "left") {
-      xStart = line.x 
-      xEnd = line.x + line.width 
-    } else if (line.align === "right") {
-      xStart = gElCanvas.width - line.width - 10 
-      xEnd = gElCanvas.width - 10 
-    } else {
-      xStart = line.x - line.width
+      xStart = line.x
       xEnd = line.x + line.width
+    } else if (line.align === "right") {
+      xStart = gElCanvas.width - line.width - 10
+      xEnd = gElCanvas.width - 10
+    } else {
+      xStart = line.x - line.width / 2
+      xEnd = line.x + line.width / 2
     }
 
     return x >= xStart && x <= xEnd && y >= line.y - line.height && y <= line.y
@@ -56,7 +56,13 @@ function onCanvasClick(event) {
 
   if (clickedLine) {
     const lineIndex = getMeme().lines.indexOf(clickedLine)
+
+    getMeme().lines[lineIndex].txt = ""
+
+    document.querySelector("[name=memeText]").value = ""
+
     getMeme().selectedLineIdx = lineIndex
+
     updateCanvas()
   }
 }
@@ -66,8 +72,8 @@ function onAddLine() {
     txt: "Insert your text here",
     Size: 30,
     Color: "white",
-    Pos: "center", 
-    y: gElCanvas.height / 2, 
+    Pos: "center",
+    y: gElCanvas.height / 2,
   })
   updateCanvas()
 }
@@ -94,7 +100,15 @@ function onSetLineText() {
 }
 
 function onEdit(event) {
-  updateLineText(event)
+  const selectedLine = getMeme().lines[getMeme().selectedLineIdx]
+
+  if (event.key === "Backspace") {
+    selectedLine.txt = selectedLine.txt.slice(0, -1)
+  } else if (event.key.length === 1) {
+    selectedLine.txt += event.key
+  }
+
+  updateCanvas()
 }
 
 function onFillStyle() {

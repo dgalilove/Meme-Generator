@@ -104,16 +104,6 @@ function updateLineText(event, inputText = null ) {
   const selectedLine = getMeme().lines[getMeme().selectedLineIdx]
   const input = document.querySelector("[name=memeText]")
 
-  if (
-    [
-      "Insert your top text here",
-      "Insert your bottom text here",
-      "Insert your text here",
-    ].includes(selectedLine.txt)
-  ) {
-    selectedLine.txt = ""
-  }
-
   if (event) {
     if (event.key === "Backspace")
       selectedLine.txt = selectedLine.txt.slice(0, -1)

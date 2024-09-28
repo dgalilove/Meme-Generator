@@ -34,6 +34,7 @@ canvas {
   display: none;
   grid-template-columns: 1fr 1fr;
   height: 100%;
+  gap: 100px;
 }
 
 
@@ -42,6 +43,7 @@ canvas {
   grid-template-rows : 1fr 1fr 1fr;
   gap: 30px;
   align-content: center;
+  margin-top: 130px;
 }
 .btn{
   border: none;

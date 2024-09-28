@@ -1,18 +1,17 @@
 .search {
   display: flex;
-  justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: white;
+  background-color: rgb(183, 187, 187);
+  height: 100px;
 }
 
 .search input[type="search"] {
   width: 300px;
+    background-color: rgb(223, 226, 226);
+
   padding: 10px;
   font-size: 1.2em;
   border: 2px solid blueviolet;
 }
 
-.search input[type="search"]:focus {
-  border-color: darkviolet;
-}

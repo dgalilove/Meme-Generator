@@ -1,109 +1,112 @@
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Meme Generator</title>
-        <link rel="stylesheet" href="styles/styles.css">
-        <script
-          src="https://kit.fontawesome.com/2a636867a9.js"
-          crossorigin="anonymous"
-        ></script>
-      </head>
-      <body onload="onInit()">
-        <header>
-          <p class="logo">memegen</p>
-          <nav class="main-nav">
-            <ul>
-              <li><a href="#">Gallery</a></li>
-              <li><a href="#">About</a></li>
-            </ul>
-          </nav>
-        </header>
-        <section class="search">
-          <input type="search" name="search" id="search" placeholder="Enter search keyword..." />
-        </section>
-        
-        <main>
-          <section class="gallery"></section>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/2a636867a9.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body onload="onInit()">
+    <header>
+      <p class="logo">memegen</p>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#" onclick="toggleGallery()">Gallery</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="search">
+      <input
+        type="search"
+        name="search"
+        placeholder="Enter search keyword..."
+        oninput="onSearch()"
+      />
+    </section>
 
-          <section class="editor">
-            <canvas width="700" height="700"> </canvas>
-            <section class="user-interface">
-              <input
-                type="text"
-                name="topLine"
-                placeholder="Enter The Top Line Here"
-                required
-                oninput="onSetLineText('top')"
-              />
-  
-              <input
-                type="text"
-                name="bottomLine"
-                placeholder="Enter The Bottom Line Here"
-                required
-                oninput="onSetLineText('bottom')"
-              />
-              <button onclick="onSwitchLine()">Switch Lines</button>
-              <button onclick="onAddLine()">Add Line</button>
-              <input type="color" name="fill-color" oninput="onFillStyle()" />
-  
-              <button onclick="onFontUp()">A+</button>
-              <button onclick="onFontDown()">A-</button>
-  
-              <a class="download-link" href="" download="meme.png">
-                <button onclick="onDownload()">Download MEME</button>
-              </a>
-              <div class="font-family-controls">
-                <select id="font-family" name="font-family" onchange="onFontStyleChange(event)">
-                  <option value="Impact">Impact</option>
-                  <option value="Arial">Arial</option>
-                  <option value="Comic Sans MS">Comic Sans MS</option>
-                  <option value="Courier New">Courier New</option>
-                  <option value="Georgia">Georgia</option>
-                  <option value="Times New Roman">Times New Roman</option>
-                  <option value="Verdana">Verdana</option>
-                </select>
-              </div>
-              <div class="text-align-controls">
-                <button onclick="onAlign('left')">Left</button>
-                <button onclick="onAlign('center')">Center</button>
-                <button onclick="onAlign('right')">Right</button>
-              </div>
-            </section>
-          </section>
-        </main>
-        <section class="bio">
-          <img src="img/dg.jpg" alt="" />
-          <div class="bio-info">
-            <h2>Daniel Galilove</h2>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut, nesciunt
-              quaerat. Soluta assumenda odit rerum repellat officiis dolor corporis,
-              ea laborum molestias delectus odio velit quos neque facilis
-              praesentium voluptas!
-            </p>
-            <ul>
-              <li>
-                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fa-brands fa-github"></i></a>
-              </li>
-            </ul>
+    <main>
+      <section class="gallery"></section>
+
+      <section class="editor">
+        <canvas width="550" height="550"> </canvas>
+        <section class="user-interface">
+          <div class="line-1">
+            <input
+            class="input"
+            type="text"
+            name="memeText"
+            placeholder="Edit Meme Text Here"
+            required
+            oninput="updateLineText(null, this.value)"
+          />
+          
+            <button class="btn switch" onclick="onSwitchLine()"><i class="fa-solid fa-repeat"></i></button>
+            <button class="btn add" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
+            <button class="btn delete" onclick="onDeleteLine()"><i class="fa-solid fa-eraser"></i></button> 
+
+          </div>
+          
+          <div class="line-2">
+            <button class="btn" onclick="onFontUp()"><i class="fa-solid fa-font"><i class="fa-solid fa-circle-plus"></i></i></button>
+            <button class="btn" onclick="onFontDown()"><i class="fa-solid fa-font"><i class="fa-solid fa-circle-minus"></i></i> </button>
+
+              <button class="btn leftAlgin" onclick="onAlign('left')"><i class="fa-solid fa-align-left"></i></button>
+              <button class="btn centerAlgin" onclick="onAlign('center')"><i class="fa-solid fa-align-center"></i></button>
+              <button class="btn rightAlgin" onclick="onAlign('right')"><i class="fa-solid fa-align-right"></i></button>
+              <select class="btn font" onchange="onFontStyleChange(event)">
+                <option value="Impact">Impact</option>
+                <option value="Arial">Arial</option>
+                <option value="Courier New">Courier New</option>
+              </select>
+            <input class="btn color" type="color" name="fill-color" oninput="onFillStyle()" />
+
+              <button class="btn" onclick="onMoveUp()"><i class="fa-solid fa-caret-up"></i></button>
+              <button class="btn" onclick="onMoveDown()"><i class="fa-solid fa-caret-down"></i></button>
+          </div>
+          
+          <div class="line-3">
+            <a class="download-link" href="" download="meme.png">
+              <button class="btn" onclick="onDownload()">Download MEME</button>
+            </a>
           </div>
         </section>
-        <footer>
-          <p>memegen</p>
-          <small>copyright daniel galilove</small>
-        </footer>
+      </section>
+    </main>
+    <section class="bio">
+      <img src="img/dg.jpg" alt="" />
+      <div class="bio-info">
+        <h2>Daniel Galilove</h2>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut, nesciunt
+          quaerat. Soluta assumenda odit rerum repellat officiis dolor corporis,
+          ea laborum molestias delectus odio velit quos neque facilis
+          praesentium voluptas!
+        </p>
+        <ul>
+          <li>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <footer>
+      <p>memegen</p>
+      <small>copyright daniel galilove</small>
+    </footer>
 
-        <script src="js/meme.service.js"></script>
-        <script src="js/gallery.controller.js"></script>
-        <script src="js/meme.controller.js"></script>
-      </body>
-    </html>
+    <script src="js/meme.service.js"></script>
+    <script src="js/gallery.controller.js"></script>
+    <script src="js/meme.controller.js"></script>
+  </body>
+</html>

@@ -8,8 +8,10 @@ html, body {
 }
 
 /* Grid layout for body */
+/* Default body layout for the gallery view */
 body {
   display: grid;
-  grid-template-rows: auto 1fr auto; /* Header, main, footer */
-  grid-template-columns: 100%;
+  grid-template-rows: 0.35fr 0.55fr 5fr 3fr 1fr;
+  margin: 0;
 }
+

@@ -66,8 +66,8 @@ function onAddLine() {
     txt: "Insert your text here",
     Size: 30,
     Color: "white",
-    Pos: "center", // Default position
-    y: gElCanvas.height / 2, // Initial Y position for center lines
+    Pos: "center", 
+    y: gElCanvas.height / 2, 
   })
   updateCanvas()
 }

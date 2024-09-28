@@ -43,6 +43,7 @@ function getMeme() {
 function setImg(elImg) {
   const id = parseInt(elImg.id.substring(3))
   gMeme.selectedImgId = id
+  return id
 }
 
 function updateCanvas() {

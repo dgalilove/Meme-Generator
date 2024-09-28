@@ -1,5 +1,5 @@
 "use strict"
-let isGallery = true 
+let isGallery = true
 
 function renderGallery(images = gImgs) {
   const elGallery = document.querySelector(".gallery")
@@ -19,12 +19,9 @@ function renderGallery(images = gImgs) {
 
   elGallery.innerHTML = strHTML
 
-
-  document.body.style.gridTemplateRows = "0.35fr 0.55fr 5fr 3fr 1fr"
-  elGallery.style.display = "grid"
-  const elEditor = document.querySelector(".editor")
-  elEditor.style.display = "none"
+  toggleGallery()
 }
+
 function onSearch() {
   const searchTerm = document.querySelector("[name=search]").value.toLowerCase()
   const filteredImgs = gImgs.filter((img) =>
@@ -33,40 +30,66 @@ function onSearch() {
   renderGallery(filteredImgs)
 }
 
-function onImgSelect(elImg) {
-  setImg(elImg) 
-  renderMeme() 
+function randomMeme() {
+  const rndmIdx = getRandomInt(0, gImgs.length - 1)
+  const rndmImg = gImgs[rndmIdx]
 
+  setImg({ id: `img${rndmImg.id}` })
+
+  switchToEditor()
+  renderMeme()
+}
+
+function onImgSelect(elImg) {
+  setImg(elImg)
+  renderMeme()
+  switchToEditor()
+}
+
+function toggleGallery() {
+  modal.style.display = "none"
   const elGallery = document.querySelector(".gallery")
   const elEditor = document.querySelector(".editor")
   const elSearch = document.querySelector(".search")
   const elBio = document.querySelector(".bio")
 
-  elGallery.style.display = elSearch.style.display = elBio.style.display = "none"
+  elGallery.style.display = "grid"
+  elSearch.style.display = "flex"
+  elBio.style.display = "grid"
 
-  elEditor.style.display = "grid" 
+  elEditor.style.display = "none"
+  isGallery = true
+  document.body.style.gridTemplateRows = "0.35fr 0.55fr 5fr 3fr 1fr"
+}
 
+function switchToEditor() {
+  const elGallery = document.querySelector(".gallery")
+  const elEditor = document.querySelector(".editor")
+  const elSearch = document.querySelector(".search")
+  const elBio = document.querySelector(".bio")
+
+  elGallery.style.display =
+    elSearch.style.display =
+    elBio.style.display =
+      "none"
+  elEditor.style.display = "grid"
   isGallery = false
 
   document.body.style.gridTemplateRows = "1fr 5fr 2fr"
 }
 
-function toggleGallery() {
-  const elGallery = document.querySelector(".gallery")
-  const elEditor = document.querySelector(".editor")
-  const elSearch = document.querySelector(".search")
-  const elBio = document.querySelector(".bio")
 
 
-  elGallery.style.display = "grid" 
-  elSearch.style.display = "flex" 
-  elBio.style.display = "grid" 
 
-  elEditor.style.display = "none"
+const modal = document.querySelector(".modal")
+const btn = document.querySelector(".ham-nav button")
+const closeBtn = document.querySelector(".close-btn")
 
-  // Update the state to reflect we're back in the gallery
-  isGallery = true
+btn.addEventListener("click", () => {
+  modal.style.display = "block"
+})
 
-  // Adjust grid layout if necessary
-  document.body.style.gridTemplateRows = "0.35fr 0.55fr 5fr 3fr 1fr" // For gallery
-}
+// Add event listener to close the modal
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none"
+})

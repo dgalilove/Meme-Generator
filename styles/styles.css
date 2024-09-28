@@ -1,10 +1,6 @@
-@import url(setup/vars.css);
-@import url(setup/typo.css);
 @import url(setup/mq.css);
 
-@import url(basics/base.css);
 @import url(basics/layout.css);
-@import url(basics/helper.css);
 
 @import url(components/header.css);
 @import url(components/search.css);

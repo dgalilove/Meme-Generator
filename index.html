@@ -5,90 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meme Generator</title>
     <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
     <script
       src="https://kit.fontawesome.com/2a636867a9.js"
       crossorigin="anonymous"
     ></script>
   </head>
+
   <body onload="onInit()">
+
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <ul>
+          <li><a href="#" onclick="toggleGallery()">Gallery</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+    </div>
+
     <header>
       <p class="logo">memegen</p>
+
       <nav class="main-nav">
         <ul>
           <li><a href="#" onclick="toggleGallery()">Gallery</a></li>
           <li><a href="#">About</a></li>
         </ul>
       </nav>
+
       <nav class="ham-nav">
         <button class=""><i class="fa-solid fa-bars"></i></button>
       </nav>
+
     </header>
+
     <section class="search">
+
       <input
         type="search"
         name="search"
         placeholder="Enter search keyword..."
         oninput="onSearch()"
       />
+
+      <button class="rndmMeme" onclick="randomMeme()">I'm flexible</button>
+
     </section>
 
     <main>
       <section class="gallery"></section>
 
       <section class="editor">
+
         <canvas width="550" height="550"> </canvas>
+
         <section class="user-interface">
           <div class="line-1">
+
             <input
-            class="input"
-            type="text"
-            name="memeText"
-            placeholder="Edit Meme Text Here"
-            required
-            oninput="updateLineText(null, this.value)"
-          />
-          
-            <button class="btn switch" onclick="onSwitchLine()"><i class="fa-solid fa-repeat"></i></button>
-            <button class="btn add" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
-            <button class="btn delete" onclick="onDeleteLine()"><i class="fa-solid fa-eraser"></i></button> 
+              class="input"
+              type="text"
+              name="memeText"
+              placeholder="Edit Meme Text Here"
+              required
+              oninput="updateLineText(null, this.value)"
+            />
 
+            <button class="btn switch" onclick="onSwitchLine()">
+              <i class="fa-solid fa-repeat"></i>
+            </button>
+
+            <button class="btn add" onclick="onAddLine()">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+
+            <button class="btn delete" onclick="onDeleteLine()">
+              <i class="fa-solid fa-eraser"></i>
+            </button>
           </div>
-          
+
           <div class="line-2">
-            <button class="btn" onclick="onFontUp()"><i class="fa-solid fa-font"><i class="fa-solid fa-circle-plus"></i></i></button>
-            <button class="btn" onclick="onFontDown()"><i class="fa-solid fa-font"><i class="fa-solid fa-circle-minus"></i></i> </button>
+            <button class="btn" onclick="onFontUp()">
+              <i class="fa-solid fa-font"
+                ><i class="fa-solid fa-circle-plus"></i
+              ></i>
+            </button>
 
-              <button class="btn leftAlgin" onclick="onAlign('left')"><i class="fa-solid fa-align-left"></i></button>
-              <button class="btn centerAlgin" onclick="onAlign('center')"><i class="fa-solid fa-align-center"></i></button>
-              <button class="btn rightAlgin" onclick="onAlign('right')"><i class="fa-solid fa-align-right"></i></button>
-              <select class="btn font" onchange="onFontStyleChange(event)">
-                <option value="Impact">Impact</option>
-                <option value="Arial">Arial</option>
-                <option value="Courier New">Courier New</option>
-              </select>
-            <input class="btn color" type="color" name="fill-color" oninput="onFillStyle()" />
+            <button class="btn" onclick="onFontDown()">
+              <i class="fa-solid fa-font"
+                ><i class="fa-solid fa-circle-minus"></i
+              ></i>
+            </button>
 
-              <button class="btn" onclick="onMoveUp()"><i class="fa-solid fa-caret-up"></i></button>
-              <button class="btn" onclick="onMoveDown()"><i class="fa-solid fa-caret-down"></i></button>
+            <button class="btn leftAlgin" onclick="onAlign('left')">
+              <i class="fa-solid fa-align-left"></i>
+            </button>
+
+            <button class="btn centerAlgin" onclick="onAlign('center')">
+              <i class="fa-solid fa-align-center"></i>
+            </button>
+
+            <button class="btn rightAlgin" onclick="onAlign('right')">
+              <i class="fa-solid fa-align-right"></i>
+            </button>
+
+            <select class="btn font" onchange="onFontStyleChange(event)">
+              <option value="Impact">Impact</option>
+              <option value="Arial">Arial</option>
+              <option value="Courier New">Courier New</option>
+            </select>
+
+            <input
+              class="btn color"
+              type="color"
+              name="fill-color"
+              oninput="onFillStyle()"
+            />
+
+            <button class="btn" onclick="onMoveUp()">
+              <i class="fa-solid fa-caret-up"></i>
+            </button>
+
+            <button class="btn" onclick="onMoveDown()">
+              <i class="fa-solid fa-caret-down"></i>
+            </button>
           </div>
-          
+
           <div class="line-3">
             <a class="download-link" href="" download="meme.png">
               <button class="btn" onclick="onDownload()">Download MEME</button>
             </a>
           </div>
+
         </section>
       </section>
     </main>
+
     <section class="bio">
+
       <img src="img/dg.jpg" alt="" />
+
       <div class="bio-info">
         <h2>Daniel Galilove</h2>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut, nesciunt
-          quaerat. Soluta assumenda odit rerum repellat officiis dolor corporis,
-          ea laborum molestias delectus odio velit quos neque facilis
-          praesentium voluptas!
+          One of the best if not the most meme creator that has ever lived his
+          only true rival is Ofer
         </p>
         <ul>
           <li>
@@ -102,12 +169,16 @@
           </li>
         </ul>
       </div>
+
     </section>
+
     <footer>
       <p>memegen</p>
       <small>copyright daniel galilove</small>
+
     </footer>
 
+    <script src="js/util.service.js"></script>
     <script src="js/meme.service.js"></script>
     <script src="js/gallery.controller.js"></script>
     <script src="js/meme.controller.js"></script>
